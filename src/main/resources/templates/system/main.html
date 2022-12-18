@@ -1,10 +1,77 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layout/system_layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WMS - Login</title>
+    <link href="/css/system/main.css" rel="stylesheet">
 </head>
-<body>
-    <h1 sec:authorize="isAuthenticated()">main</h1>
-</body>
+<div layout:fragment="content" class="main-container">
+    <div class="top-container">
+        <div class="card">
+            <div class="card-body first-card">
+                <h5 class="card-title">총 상품 수</h5>
+                <h3 class="card-text" th:text="|${product_size}개|"></h3>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body second-card">
+                <h5 class="card-title">총 매장 수</h5>
+                <h3 class="card-text" th:text="|${store_size}개|"></h3>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body third-card">
+                <h5 class="card-title">총 거래처 수</h5>
+                <h3 class="card-text" th:text="|${supplier_size}개|"></h3>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body fourth-card">
+                <h5 class="card-title">총 상품 수</h5>
+                <h3 class="card-text">300개</h3>
+            </div>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>
+                <th scope="col">location</th>
+                <th scope="col">products</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="store : ${storePage}">
+                <th scope="row" th:text="${store.id}"></th>
+                <td th:text="${store.name}"></td>
+                <td th:text="${store.location}"></td>
+                <td th:text="${store}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            <div th:if="${!storePage.isEmpty()}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${!storePage.hasPrevious} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{|?store_page=${storePage.number-1}|}">
+                            <span>이전</span>
+                        </a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(0, storePage.totalPages-1)}"
+                        th:if="${page >= storePage.number-5 and page <= storePage.number+5}"
+                        th:classappend="${page == storePage.number} ? 'active'"
+                        class="page-item">
+                        <a th:text="${page}" class="page-link" th:href="@{|?store_page=${page}|}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${!storePage.hasNext} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?store_page=${storePage.number+1}|}">
+                            <span>다음</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

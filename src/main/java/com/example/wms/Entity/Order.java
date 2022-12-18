@@ -1,2 +1,4 @@
-package com.example.wms.Entity;public class Order {
+package com.example.wms.Entity;
+
+public class Order {
 }

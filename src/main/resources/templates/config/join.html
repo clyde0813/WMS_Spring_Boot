@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<html layout:decorate="~{layout/layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>WMS - Login</title>
+    <link href="/css/config/join.css" rel="stylesheet"/>
 </head>
-<body>
-$END$
-</body>
+<div layout:fragment="content" class="main-container">
+    <div class="border-container">
+        <div class="form-container">
+            <img class="icon" src="/image/config/config_icon.png">
+            <h1>WMS</h1>
+            <p>Warehouse Management System</p>
+            <form class="form" th:action="@{/join}" th:object="${userCreateForm}" method="post">
+                <div th:replace="~{form/form_errors :: formErrorsFragment}"></div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" th:field="*{email}" class="form-control" id="email" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" th:field="*{username}" class="form-control" id="username" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" th:field="*{password1}" class="form-control" id="password" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="password2" class="form-label">Password check</label>
+                    <input type="password" th:field="*{password2}" class="form-control" id="password2">
+                </div>
+                <button type="submit" class="btn btn-dark">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
 </html>

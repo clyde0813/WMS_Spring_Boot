@@ -1,0 +1,64 @@
+.top-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.card {
+    width: 10rem;
+    height: 10rem;
+    margin-right: 5rem;
+    border-radius: 20px;
+}
+
+.card-body {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.first-card {
+    background-color: #311FDB;
+    color: white;
+
+}
+
+.second-card {
+    background-color: #3499FF;
+    color: white;
+
+}
+
+.third-card {
+    background-color: #F9B114;
+    color: white;
+
+}
+
+.fourth-card {
+    background-color: #E55353;
+    color: white;
+
+}
+
+.table-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.table{
+    width: 95%;
+    margin: 2rem 0 2rem 0;
+}
+
+.pagination-container {
+    margin: 0 0 1rem 0;
+}

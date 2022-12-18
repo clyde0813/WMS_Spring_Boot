@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<html layout:decorate="~{layout/system_layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>WMS - Login</title>
+    <link href="/css/system/main.css" rel="stylesheet">
 </head>
-<body>
-$END$
-</body>
+<div layout:fragment="content" class="main-container">
+    <table>
+    <thead>
+        <tr>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="store : ${store_list}">
+            <td th:text="${store.name}"></td>
+            <td th:text="${store.location}"></td>
+        </tr>
+    </tbody>
+</table>
+</div>
 </html>

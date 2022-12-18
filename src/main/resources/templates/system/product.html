@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+<html layout:decorate="~{layout/system_layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>WMS - Login</title>
+    <link href="/css/system/product.css" rel="stylesheet">
 </head>
-<body>
-$END$
-</body>
+<div layout:fragment="content" class="main-container">
+    <div class="top-container">
+        <h1 class="title">Products</h1>
+    </div>
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>
+                <th scope="col">weight</th>
+                <th scope="col">price</th>
+                <th scope="col">expiration</th>
+                <th scope="col">supplier</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${product_list}">
+                <th scope="row" th:text="${product.id}"></th>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.weight}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.expiration}"></td>
+                <td th:text="${product.supplier.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">2</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                <li class="page-item"><a class="page-link" href="#">7</a></li>
+                <li class="page-item"><a class="page-link" href="#">8</a></li>
+                <li class="page-item"><a class="page-link" href="#">9</a></li>
+                <li class="page-item"><a class="page-link" href="#">10</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
 </html>

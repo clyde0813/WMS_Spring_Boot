@@ -1,0 +1,22 @@
+.top-container {
+    width: 90%;
+    display: flex;
+    margin: 2rem 0 0 0;
+    align-items: start;
+}
+
+.table-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.table {
+    width: 95%;
+    margin: 2rem 0 2rem 0;
+}

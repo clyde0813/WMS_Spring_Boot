@@ -1,2 +1,4 @@
-package com.example.wms.Entity;public class Inventory {
+package com.example.wms.Entity;
+
+public class Inventory {
 }
