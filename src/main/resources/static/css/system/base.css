@@ -1,3 +1,9 @@
+@media (max-width: 800px) {
+    body{
+        font-size: 10px;
+    }
+}
+
 .wrap {
     width: 100vw;
     height: 100vh;
@@ -47,7 +53,7 @@
     background-color: white;
 }
 
-.button-container{
+.button-container {
     display: flex;
     margin-right: 5rem;
     align-items: center;

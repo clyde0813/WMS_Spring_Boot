@@ -25,8 +25,8 @@
         </div>
         <div class="card">
             <div class="card-body fourth-card">
-                <h5 class="card-title">총 상품 수</h5>
-                <h3 class="card-text">300개</h3>
+                <h5 class="card-title">내 가맹점</h5>
+                <h3 class="card-text" th:text="|${mystoreSize}개|"></h3>
             </div>
         </div>
     </div>
@@ -37,7 +37,8 @@
                 <th scope="col">#</th>
                 <th scope="col">name</th>
                 <th scope="col">location</th>
-                <th scope="col">products</th>
+                <th scope="col">email</th>
+                <th scope="col">username</th>
             </tr>
             </thead>
             <tbody>
@@ -45,7 +46,8 @@
                 <th scope="row" th:text="${store.id}"></th>
                 <td th:text="${store.name}"></td>
                 <td th:text="${store.location}"></td>
-                <td th:text="${store}"></td>
+                <td th:text="${store.user.email}"></td>
+                <td th:text="${store.user.username}"></td>
             </tr>
             </tbody>
         </table>

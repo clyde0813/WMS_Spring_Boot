@@ -1,13 +1,14 @@
 <html layout:decorate="~{layout/system_layout}">
 <head>
-    <title>WMS - Login</title>
+    <title>WMS</title>
     <link href="/css/system/product.css" rel="stylesheet">
 </head>
 <div layout:fragment="content" class="main-container">
     <div class="top-container">
         <h1 class="title">Products</h1>
         <div class="search-container">
-            <form th:action="@{/product}" method="get">
+            <button class="btn btn-dark add-button" type="button" id="add-button">Add</button>
+            <form th:action="@{/product}" method="get" class="form-container">
                 <div class="input-group">
                     <input type="text" class="form-control" id="keyword" name="keyword" th:value="${keyword}">
                     <button class="btn btn-dark" type="submit">Search</button>
@@ -62,5 +63,50 @@
             </ul>
         </div>
     </div>
+    <div class="modal">
+        <div class="modal_body">
+            <span class="close">&times;</span>
+            <form class="add-form-container" th:action="@{/product}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="weight" class="form-label">중량</label>
+                    <input type="number" class="form-control" id="weight" name="weight" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">가격</label>
+                    <input type="number" class="form-control" id="price" name="price" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="expiration" class="form-label">유통기한</label>
+                    <input type="number" class="form-control" id="expiration" name="expiration"
+                           aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="supplier_id" class="form-label">유통사</label>
+                    <select class="form-select" aria-label="Default select example" id="supplier_id" name="supplier_id">
+                        <option selected>Open this select menu</option>
+                        <option th:each="supplier : ${supplierList}" th:value="${supplier.id}"
+                                th:utext="${supplier.name}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-dark add-form-button">Submit</button>
+            </form>
+
+        </div>
+    </div>
+    <script>
+        const modal = document.querySelector('.modal');
+        const btnOpenPopup = document.querySelector('.add-button');
+        const btnClosePopup = document.querySelector('.close');
+        btnOpenPopup.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+        btnClosePopup.addEventListener('click', () => {
+            modal.style.display = 'None';
+        })
+    </script>
 </div>
 </html>

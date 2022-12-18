@@ -1,0 +1,62 @@
+<html layout:decorate="~{layout/system_layout}">
+<head>
+    <title>WMS</title>
+    <link href="/css/system/product.css" rel="stylesheet">
+</head>
+<div layout:fragment="content" class="main-container">
+    <div class="top-container">
+        <h1 class="title">Inventory</h1>
+        <div class="search-container">
+            <form th:action="@{/inventory}" method="get" class="form-container">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="keyword" name="keyword" th:value="${keyword}">
+                    <button class="btn btn-dark" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">지점</th>
+                <th scope="col">품목</th>
+                <th scope="col">수량</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="data : ${inventoryPage}">
+                <th scope="row" th:text="${data.id}"></th>
+                <td th:text="${data.store.name}"></td>
+                <td th:text="|${data.product.name}|"></td>
+                <td th:text="|${data.volume}|"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <div th:if="${!inventoryPage.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!inventoryPage.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${inventoryPage.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, inventoryPage.totalPages-1)}"
+                    th:if="${page >= inventoryPage.number-5 and page <= inventoryPage.number+5}"
+                    th:classappend="${page == inventoryPage.number} ? 'active'"
+                    class="page-item">
+                    <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!inventoryPage.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${inventoryPage.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</html>

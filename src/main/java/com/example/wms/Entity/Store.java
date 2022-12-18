@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "store")
+@Table(name = "wms_store")
 @Getter
 @Setter
 @Builder
@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(length = 255, nullable = false)
     private String name;

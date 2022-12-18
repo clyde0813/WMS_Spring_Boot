@@ -52,7 +52,6 @@ public class ConfigController {
             bindingResult.reject("signupFailed", e.getMessage());
             return "config/join";
         }
-        userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword1());
 
         return "redirect:/login";
     }

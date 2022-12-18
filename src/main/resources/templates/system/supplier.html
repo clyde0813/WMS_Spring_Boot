@@ -1,0 +1,64 @@
+<html layout:decorate="~{layout/system_layout}">
+<head>
+    <title>WMS</title>
+    <link href="/css/system/product.css" rel="stylesheet">
+</head>
+<div layout:fragment="content" class="main-container">
+    <div class="top-container">
+        <h1 class="title">Supplier</h1>
+        <div class="search-container">
+            <form th:action="@{/supplier}" method="get" class="form-container">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="keyword" name="keyword" th:value="${keyword}">
+                    <button class="btn btn-dark" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">이름</th>
+                <th scope="col">사업자번호</th>
+                <th scope="col">주소</th>
+                <th scope="col">대표이사</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="data : ${supplierPage}">
+                <th scope="row" th:text="${data.id}"></th>
+                <td th:text="${data.name}"></td>
+                <td th:text="${data.license}"></td>
+                <td th:text="${data.location}"></td>
+                <td th:text="${data.owner}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination-container">
+        <div th:if="${!supplierPage.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!supplierPage.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${supplierPage.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, supplierPage.totalPages-1)}"
+                    th:if="${page >= supplierPage.number-5 and page <= supplierPage.number+5}"
+                    th:classappend="${page == supplierPage.number} ? 'active'"
+                    class="page-item">
+                    <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!supplierPage.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${supplierPage.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</html>
