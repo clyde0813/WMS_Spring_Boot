@@ -5,6 +5,11 @@
     align-items: start;
 }
 
+.search-container {
+    width: 30rem;
+    margin-left: auto;
+}
+
 .table-container {
     width: 90%;
     display: flex;

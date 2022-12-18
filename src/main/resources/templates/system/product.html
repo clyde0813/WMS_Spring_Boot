@@ -6,54 +6,61 @@
 <div layout:fragment="content" class="main-container">
     <div class="top-container">
         <h1 class="title">Products</h1>
+        <div class="search-container">
+            <form th:action="@{/product}" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="keyword" name="keyword" th:value="${keyword}">
+                    <button class="btn btn-dark" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="table-container">
         <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">name</th>
-                <th scope="col">weight</th>
-                <th scope="col">price</th>
-                <th scope="col">expiration</th>
-                <th scope="col">supplier</th>
+                <th scope="col">이름</th>
+                <th scope="col">무게</th>
+                <th scope="col">가격</th>
+                <th scope="col">유통기한</th>
+                <th scope="col">유통사</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product : ${product_list}">
+            <tr th:each="product : ${productPage}">
                 <th scope="row" th:text="${product.id}"></th>
                 <td th:text="${product.name}"></td>
-                <td th:text="${product.weight}"></td>
-                <td th:text="${product.price}"></td>
-                <td th:text="${product.expiration}"></td>
+                <td th:text="|${product.weight}g|"></td>
+                <td th:text="|${product.price}원|"></td>
+                <td th:text="|${product.expiration}일|"></td>
                 <td th:text="${product.supplier.name}"></td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="pagination-container">
-        <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
+        <div th:if="${!productPage.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!productPage.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${productPage.number-1}|}">
+                        <span>이전</span>
+                    </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">2</span>
+                <li th:each="page: ${#numbers.sequence(0, productPage.totalPages-1)}"
+                    th:if="${page >= productPage.number-5 and page <= productPage.number+5}"
+                    th:classappend="${page == productPage.number} ? 'active'"
+                    class="page-item">
+                    <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                <li class="page-item"><a class="page-link" href="#">7</a></li>
-                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                <li class="page-item"><a class="page-link" href="#">9</a></li>
-                <li class="page-item"><a class="page-link" href="#">10</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                <li class="page-item" th:classappend="${!productPage.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${productPage.number+1}|}">
+                        <span>다음</span>
+                    </a>
                 </li>
             </ul>
-        </nav>
+        </div>
     </div>
 </div>
 </html>

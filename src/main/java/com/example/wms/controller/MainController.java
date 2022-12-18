@@ -6,6 +6,7 @@ import com.example.wms.Entity.Supplier;
 import com.example.wms.repository.ProductRepository;
 import com.example.wms.repository.StoreRepository;
 import com.example.wms.repository.SupplierRepository;
+import com.example.wms.service.ProductService;
 import com.example.wms.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import java.util.List;
 public class MainController {
 
     private final StoreService storeService;
+    private final ProductService productService;
     private final StoreRepository storeRepository;
     private final ProductRepository productRepository;
     private final SupplierRepository supplierRepository;
@@ -40,9 +42,10 @@ public class MainController {
     }
 
     @GetMapping("/product")
-    public String Product(Model model) {
-        List<Product> productList = this.productRepository.findAll();
-        model.addAttribute("product_list", productList);
+    public String Product(Model model, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "keyword", defaultValue = "") String kw) {
+        Page<Product> productPage = this.productService.getList(page, kw);
+        model.addAttribute("productPage", productPage);
+        model.addAttribute("keyword", kw);
         return "system/product";
     }
 
